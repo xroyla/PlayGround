@@ -132,4 +132,18 @@ describe('MISC tests', function() {
       expect(unicorn.hornAttack(thief)).toBe('Rupert was obliterated!');
     });
   });
+
+  describe('string extraction', function() {
+    it('regex', function() {
+      const originalString = `https://farm4.staticflickr.com - - [01/jul/1995:00:00:12 -0400] "GET /3894/15008518202_c265dfa55f_h.gif http/1.0" 200 40310`;
+
+      const hasValidGifRegex = new RegExp('GET (.)*\\.gif (.)*\" 200', 'i');
+      const fileNameRegex = new RegExp("([^/])*\\.gif", 'i');
+
+      if (originalString.match(hasValidGifRegex).length) {
+        expect(fileNameRegex.exec(originalString)[0]).toBe('15008518202_c265dfa55f_h.gif');
+        console.log(originalString.split(' '));
+      }
+    });
+  });
 });
